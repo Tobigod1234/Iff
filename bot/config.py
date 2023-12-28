@@ -33,3 +33,4 @@ class Config(object):
     LOG_FILE_ZZGEVC = get_config("LOG_FILE_ZZGEVC", "Log.txt")
     # because, https://t.me/c/1494623325/5603
     SHOULD_USE_BUTTONS = get_config("SHOULD_USE_BUTTONS", True)
+    URL = get_config("URL", "https://atglinks.com/api?api=498ee7efdd27b59fa6436070a5a3eb28d1a39e80")  # Update with your actual shortening service's base URL
