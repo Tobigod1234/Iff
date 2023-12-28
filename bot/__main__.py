@@ -1,4 +1,4 @@
-# oof
+import requests
 from datetime import datetime as dt
 import os
 from bot import (
@@ -39,6 +39,7 @@ from bot.plugins.status_message_fn import (
     upload_log_file
 )
 
+from config import Config
 from bot.commands import Command
 from bot.plugins.call_back_button_handler import button
 sudo_users = "1666551439" 
@@ -49,7 +50,12 @@ preset.append("veryfast")
 audio_b.append("40k")
 # 🤣
 
-
+def short_me(token: str) -> str:
+   short_url = requests.get(Config.URL + token, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}) # make request to the URL shortening service
+   if short_url.json()['status'] == "success": # if the request is successful
+       return short_url.json()['shortenedUrl'] # return the shortened URL
+   return None
+    
 uptime = dt.now()
 
 def ts(milliseconds: int) -> str:
