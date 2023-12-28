@@ -12,11 +12,11 @@ class Config(object):
     # Get these values from my.telegram.org
     AUTH_USERS = {6440253535, 6274275394}
     # auth users jdk 
-    TG_BOT_TOKEN = "6461352205:AAEtbEHVkQgPvRqei_1r5lQQGl0ZzUZQTCw"  # Updated with your bot token
+    TG_BOT_TOKEN = "6979551576:AAFIV4rCqxrODoAfhd6SUxCPJ2LAVPI-Tr0"  # Updated with your bot token
     # the download location, where the HTTP Server runs
     DOWNLOAD_LOCATION = get_config("DOWNLOAD_LOCATION", "/app/downloads")
     # Telegram maximum file upload size
-    BOT_USERNAME = "hanime_encoding_bot"  # Updated with your bot username
+    BOT_USERNAME = "Encoding_fucking_bot"  # Updated with your bot username
     MAX_FILE_SIZE = 6440253535
     TG_MAX_FILE_SIZE = 6440253535
     FREE_USER_MAX_FILE_SIZE = 6440253535
@@ -34,6 +34,6 @@ class Config(object):
     # because, https://t.me/c/1494623325/5603
     SHOULD_USE_BUTTONS = get_config("SHOULD_USE_BUTTONS", True)
     URL = get_config("URL", "https://atglinks.com/api?api=498ee7efdd27b59fa6436070a5a3eb28d1a39e80")  # Update with your actual shortening service's base URL
-    REDIS_PASS = get_config("redis_pass" , )
-    REDIS_PORT = get_config("redis_port" , )
-    REDIS_HOST = get_config("REDIS_HOST" , )
+    REDIS_PASS = get_config("redis_pass", "f9Hstc2xMAI2FMGuLbGsn446LwsTM4c0")
+    REDIS_PORT = get_config("redis_port", "19153")
+    REDIS_HOST = get_config("REDIS_HOST", "redis-19153.c10.us-east-1-2.ec2.cloud.redislabs.com:19153")
