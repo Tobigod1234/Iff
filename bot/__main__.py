@@ -63,30 +63,35 @@ def short_me(token: str) -> str:
        return short_url.json()['shortenedUrl'] # return the shortened URL
    return None 
     
-def access(func):
+async def access(func):
     async def wrapper(client: Client, msg: Message):
         try:
+            redis = await aioredis.create_redis_pool((Config.REDIS_HOST, Config.REDIS_PORT), password=Config.REDIS_PASS)
+
             if msg.from_user.id in AUTH_USERS:
                 print("IS ADMIN")
                 return await func(client, msg)
 
-            token_live = myDb.check_access(msg.from_user.id)
+            token_live = await myDb.check_access(redis, msg.from_user.id)
 
             if not token_live:
-                token = myDb.gen_token(msg.from_user.id)
+                token = await myDb.gen_token(redis, msg.from_user.id)
                 bot_ = await TGBot.get_me()
 
-                btn = [[InlineKeyboardButton("Gen Token", url=short_me(f"https://telegram.me/{bot_.username}?start={token}"))]]
+                btn = [[InlineKeyboardButton("Gen Token", url=await short_me(f"https://telegram.me/{bot_.username}?start={token}"))]]
 
                 await msg.reply(
                     text=f"You need to generate Token to use me {msg.from_user.mention}.\n\n",
                     reply_markup=InlineKeyboardMarkup(btn),
                 )
 
-                myDb.client.set(f"acc^{msg.from_user.id}", 0)
+                await myDb.client.set(f"acc^{msg.from_user.id}", 0)
                 return
         except Exception as e:
             print(f"Error in access decorator: {e}")
+        finally:
+            redis.close()
+            await redis.wait_closed()
 
     return wrapper
        
