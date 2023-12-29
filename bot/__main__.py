@@ -198,9 +198,8 @@ async def restarter(app, message):
     data.clear()
     await message.reply_text("✅ Successfully cleared Queue ...")
 
-# Modify the encoding command handler
 @app.on_message(filters.incoming & (filters.video | filters.document))
-@access  # Apply the access decorator
+@access  
 async def encode_file(app, message):
     query = await message.reply_text("ᴀᴅᴅᴇᴅ ᴛᴏ ǫᴜᴇᴜᴇ...\nᴘʟᴇᴀsᴇ ʙᴇ ᴘᴀᴛɪᴇɴᴛ ʏᴏᴜ ᴇɴᴄᴏᴅᴇ ᴡɪʟʟ sᴛᴀʀᴛ sᴏᴏɴ", quote=True)
     
@@ -209,8 +208,6 @@ async def encode_file(app, message):
     if len(data) == 1:
         await query.delete()   
         await add_task(message)
-
-# ... (remaining code)
 
 @app.on_message(filters.incoming & (filters.photo))
 async def help_message(app, message):
