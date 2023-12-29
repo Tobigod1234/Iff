@@ -34,7 +34,7 @@ class Config(object):
     # because, https://t.me/c/1494623325/5603
     SHOULD_USE_BUTTONS = get_config("SHOULD_USE_BUTTONS", True)
     URL = get_config("URL", "https://atglinks.com/api?api=498ee7efdd27b59fa6436070a5a3eb28d1a39e80")  # Update with your actual shortening service's base URL
-    REDIS_PASS = get_config("redis_pass", "f9Hstc2xMAI2FMGuLbGsn446LwsTM4c0")
-    REDIS_PORT = get_config("redis_port", "19153")
-    REDIS_HOST = get_config("REDIS_HOST", "redis-19153.c10.us-east-1-2.ec2.cloud.redislabs.com:19153")
+    REDIS_PASS = get_config("redis_pass", "NhA1r2MMynwXzkZnX88qY5nyOZNzaIUe")
+    REDIS_PORT = get_config("redis_port", "18377")
+    REDIS_HOST = get_config("REDIS_HOST", "redis-18377.c267.us-east-1-4.ec2.cloud.redislabs.com:18377")
     TIMEOUT = 4200
