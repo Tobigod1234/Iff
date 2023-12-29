@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime as dt
 import os
+import aioredis
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from bot.config import Config
 from bot import (
