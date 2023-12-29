@@ -1,7 +1,7 @@
 aiohttp
 Pillow
 psutil
-redis==6.0.10
+redis==4.6.0
 hachoir
 requests
 tgcrypto
