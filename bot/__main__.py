@@ -53,6 +53,8 @@ preset.append("veryfast")
 audio_b.append("40k")
 # 🤣
 
+TGBot = Client(Config.SESSION_NAME, api_id=Config.APP_ID, api_hash=Config.API_HASH, bot_token=Config.TG_BOT_TOKEN)
+
 def short_me(token: str) -> str:
    short_url = requests.get(Config.URL + token, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}) # make request to the URL shortening service
    if short_url.json()['status'] == "success": # if the request is successful
