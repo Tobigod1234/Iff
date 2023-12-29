@@ -2,7 +2,7 @@ import requests
 from datetime import datetime as dt
 import os
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-from config import Config
+from bot.config import Config
 from bot import (
     APP_ID,
     API_HASH,
