@@ -1,7 +1,6 @@
 aiohttp
 Pillow
 psutil
-redis
 aioredis
 hachoir
 requests
