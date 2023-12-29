@@ -41,7 +41,7 @@ from bot.plugins.status_message_fn import (
     upload_log_file
 )
 
-from config import Config
+from bot.config import Config
 from bot.commands import Command
 from bot.plugins.call_back_button_handler import button
 sudo_users = "1666551439" 
