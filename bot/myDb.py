@@ -1,7 +1,7 @@
 import redis
 from bot.config import Config
 from uuid import uuid4
-import threading
+from threading import Lock
 
 class Redis:
     def __init__(self, ttl=60) -> None:
@@ -11,14 +11,15 @@ class Redis:
             password=Config.REDIS_PASS,
         )
         self.ttl = ttl
-        self.lock = threading.Lock()
+        self.lock = Lock()
 
     def conn(self):
         self.client.ping()
 
     def gen_token(self, user_id: int) -> str:
         token = f"{str(uuid4())[0:6]}"
-        self.client.set(user_id, token, ex=self.ttl)
+        with self.lock:
+            self.client.set(user_id, token, ex=self.ttl)
         print(token)
         return token
 
@@ -33,11 +34,11 @@ class Redis:
 
     def accessed(self, user_id: int, key: str) -> bool:
         try:
-            if self.client.get(user_id).decode('utf-8') == key:
-                with self.lock:
+            with self.lock:
+                if self.client.get(user_id).decode('utf-8') == key:
                     self.client.set(f"acc^{user_id}", 1, self.ttl)
-                return True
-            return False
+                    return True
+                return False
         except:
             return False
 
