@@ -37,3 +37,4 @@ class Config(object):
     REDIS_PASS = get_config("redis_pass", "f9Hstc2xMAI2FMGuLbGsn446LwsTM4c0")
     REDIS_PORT = get_config("redis_port", "19153")
     REDIS_HOST = get_config("REDIS_HOST", "redis-19153.c10.us-east-1-2.ec2.cloud.redislabs.com:19153")
+    TIMEOUT = 4200
