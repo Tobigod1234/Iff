@@ -1,11 +1,11 @@
 aiohttp
 Pillow
 psutil
-redis==4.6.0
+redis
 hachoir
 requests
 tgcrypto
-pyrogram==1.4
+pyrogram
 motor
 https://github.com/Tinche/aiofiles/archive/master.zip
 dnspython
