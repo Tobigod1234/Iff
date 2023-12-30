@@ -1,9 +1,10 @@
 import redis
-from bot.config import Config
+from config import Config
 from uuid import uuid4
-from threading import Lock
+from redis.exceptions import RedisError
 
 class Redis:
+
     def __init__(self, ttl=60) -> None:
         self.client = redis.Redis(
             host=Config.REDIS_HOST,
@@ -11,35 +12,47 @@ class Redis:
             password=Config.REDIS_PASS,
         )
         self.ttl = ttl
-        self.lock = Lock()
 
     def conn(self):
-        self.client.ping()
+        try:
+            self.client.ping()
+        except RedisError as e:
+            print(f"Error connecting to Redis: {e}")
 
     def gen_token(self, user_id: int) -> str:
-        token = f"{str(uuid4())[0:6]}"
-        with self.lock:
+        try:
+            token = f"{str(uuid4())[0:6]}"
             self.client.set(user_id, token, ex=self.ttl)
-        print(token)
-        return token
+            print(token)
+            return token
+        except RedisError as e:
+            print(f"Error generating token: {e}")
+            return ""
 
     def check_access(self, user_id: int) -> bool:
-        return self.client.get(user_id) is not None
+        try:
+            return self.client.get(user_id) is not None
+        except RedisError as e:
+            print(f"Error checking access: {e}")
+            return False
 
     def got_key(self, user_id):
         try:
             return self.client.get(f"acc^{user_id}").decode('utf-8') == '1'
-        except:
+        except RedisError as e:
+            print(f"Error checking key: {e}")
             return False
 
     def accessed(self, user_id: int, key: str) -> bool:
         try:
-            with self.lock:
-                if self.client.get(user_id).decode('utf-8') == key:
-                    self.client.set(f"acc^{user_id}", 1, self.ttl)
-                    return True
-                return False
-        except:
+            if self.client.get(user_id).decode('utf-8') == key:
+                self.client.set(f"acc^{user_id}", 1, self.ttl)
+                return True
+            return False
+        except RedisError as e:
+            print(f"Error accessing: {e}")
             return False
 
+# Example usage
 myDb = Redis(Config.TIMEOUT)
+myDb.conn()  # Call this method to check connection
