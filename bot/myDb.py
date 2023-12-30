@@ -55,4 +55,7 @@ class Redis:
 
 # Example usage
 myDb = Redis(Config.TIMEOUT)
-myDb.conn()  # Call this method to check connection
+myDb.conn() # Call this method to check connection change in this code 
+
+# This line should be executed in the client side, for example when a user enters their key.
+myDb.accessed(12345, '123456')
