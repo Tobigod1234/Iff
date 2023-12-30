@@ -1,5 +1,5 @@
 import redis
-from config import Config
+from bot.config import Config
 from uuid import uuid4
 from redis.exceptions import RedisError
 
