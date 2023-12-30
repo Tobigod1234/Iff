@@ -44,22 +44,22 @@ class Redis:
             return False
 
     def accessed(self, user_id: int, key: str) -> bool:
-    try:
-        # Get the token from the Redis database or provide a default value if it does not exist
-        token = self.client.get(user_id) or ""
-        
-        # If the token exists and matches the key, grant access
-        if token.decode('utf-8') == key:
-            self.client.set(f"acc^{user_id}", 1, self.ttl)
-            return True
-        return False
-    except RedisError as e:
-        print(f"Error accessing: {e}")
-        return False
+        try:
+            # Get the token from the Redis database or provide a default value if it does not exist
+            token = self.client.get(user_id) or ""
+            
+            # If the token exists and matches the key, grant access
+            if token.decode('utf-8') == key:
+                self.client.set(f"acc^{user_id}", 1, self.ttl)
+                return True
+            return False
+        except RedisError as e:
+            print(f"Error accessing: {e}")
+            return False
 
 # Example usage
 myDb = Redis(Config.TIMEOUT)
-myDb.conn() # Call this method to check connection change in this code 
+myDb.conn()  # Call this method to check connection change in this code 
 
-# This line should be executed in the client side, for example when a user enters their key.
+# This line should be executed on the client side, for example when a user enters their key.
 myDb.accessed(12345, '123456')
