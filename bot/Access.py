@@ -1,5 +1,5 @@
 from bot.myDb import myDb
-from bot.main import TGBot, logger
+from bot._main_ import TGBot, logger
 from bot.url import short_me
 from bot.config import Config
 
