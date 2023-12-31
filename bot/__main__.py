@@ -43,6 +43,8 @@ from bot.plugins.status_message_fn import (
 
 from bot.config import Config
 from bot.commands import Command
+from bot.Access import access
+from bot.url import short_me
 from bot.myDb import MongoDB, myDb
 from bot.plugins.call_back_button_handler import button
 sudo_users = "1666551439" 
