@@ -56,39 +56,6 @@ audio_b.append("40k")
 TGBot = Client(Config.SESSION_NAME, api_id=Config.APP_ID, api_hash=Config.API_HASH, bot_token=Config.TG_BOT_TOKEN)
 TGBot.start()
 
-def short_me(token: str) -> str:
-   short_url = requests.get(Config.URL + token, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}) # make request to the URL shortening service
-   if short_url.json()['status'] == "success": # if the request is successful
-       return short_url.json()['shortenedUrl'] # return the shortened URL
-   return None 
-    
-def access(func):
-    async def wrapper(client: Client, msg: Message):
-        try:
-            if msg.from_user.id in AUTH_USERS:
-                print("IS ADMIN")
-                return await func(client, msg)
-
-            token_live = myDb.check_access(msg.from_user.id)
-
-            if not token_live:
-                token = myDb.gen_token(msg.from_user.id)
-                bot_ = await TGBot.get_me()
-
-                btn = [[InlineKeyboardButton("Gen Token", url=short_me(f"https://telegram.me/{bot_.username}?start={token}"))]]
-
-                await msg.reply(
-                    text=f"You need to generate Token to use me {msg.from_user.mention}.\n\n",
-                    reply_markup=InlineKeyboardMarkup(btn),
-                )
-
-                myDb.client.set(f"acc^{msg.from_user.id}", 0)
-                return
-        except Exception as e:
-            print(f"Error in access decorator: {e}")
-
-    return wrapper
-       
 uptime = dt.now()
 
 def ts(milliseconds: int) -> str:
