@@ -34,6 +34,6 @@ class Config(object):
     # because, https://t.me/c/1494623325/5603
     SHOULD_USE_BUTTONS = get_config("SHOULD_USE_BUTTONS", True)
     URL = get_config("URL", "https://atglinks.com/api?api=498ee7efdd27b59fa6436070a5a3eb28d1a39e80")  # Update with your actual shortening service's base URL
-    MONGO_URI = "mongodb+srv://Animedbuser:1234@cluster0.xgasqci.mongodb.net/?retryWrites=true&w=majority"  
+    MONGO_URI = "mongodb+srv://personaluse:ImCrAzYbOy@personaluse.ounsjuz.mongodb.net/?retryWrites=true&w=majority"  
     MONGO_DB = "cluster0"           
     TIMEOUT = 43200  
