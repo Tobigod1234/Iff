@@ -2,6 +2,7 @@ import requests
 from datetime import datetime as dt
 import os
 import logging
+from bot.Db import *
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
