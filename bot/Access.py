@@ -1,6 +1,7 @@
 from bot.myDb import myDb
 from bot.url import short_me
 from bot.config import Config
+from bot.Db import *
 
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram import Client
