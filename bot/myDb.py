@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from bot.config import Config
 from uuid import uuid4
+from bot.Db import *
 
 class MongoDB:
 
